@@ -1,0 +1,72 @@
+body {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    transition:  background-color .3s ease-in;
+    .loading{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        height: 100vh;
+    // color :#fff;
+    }
+    .container {
+        // width: 100%;
+        padding: 12px;
+        margin-right: auto;
+        margin-left: auto;
+        @media (min-width: 1246px) {
+            max-width: 1185px;
+        }
+        @media (min-width: 960px) {
+            max-width: 900px;
+        }
+    }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            background-color: var(--bg-darker);
+            box-shadow: var(--box-shadow);
+            .logo {
+                max-width: 200px;
+                & svg {
+                    fill: var(--font-color);
+                    transition: fill .3s ease-in;
+                }
+            }
+            .mode-switcher {
+                display: flex;
+                align-items: center;
+                color: var(--font-color);
+                transition: color .3s ease-in;
+                cursor: pointer;
+                & svg {
+                    transition: fill .3s ease-in;
+
+                    margin-right: 10px;
+                    fill: var(--font-color);
+                }
+            }
+        }
+        .breadcrumbs {
+            width: 100vw;
+            height: 300px;
+            background-position: top-left;
+            background-image: url("https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa418c362-2956-4bc2-9027-ed3c949b7f3e%2FIMG_6924.jpg?table=block&id=1b2184e4-0dea-47df-840b-7c0cc638e61e&spaceId=196736dd-250f-45b1-ac1f-c4302855a2f9&width=2000&userId=2e07ec9f-d077-446d-835f-2a785af8d263&cache=v2");
+            background-size: cover;
+            background-position: 50% 60%;
+        }
+        footer {
+            text-align: center;
+            color: var(--font-color);
+            background-color: var(--bg-darker);
+            box-shadow: var(--box-shadow);
+            transition: color .3s ease-in;
+        }
+    
+}

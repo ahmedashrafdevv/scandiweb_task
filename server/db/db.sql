@@ -26,9 +26,10 @@
 DROP
     DATABASE IF EXISTS scandiweb_products;
 CREATE DATABASE scandiweb_products;
+USE scandiweb_products;
 # here we are creating the product types table with very simple schema just store the name
 # and now we can create as many types as we can and attach them to the products simply
-CREATE TABLE TYPES(
+CREATE TABLE types(
     id INT AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(250)
 ) ENGINE = INNODB;
@@ -41,7 +42,7 @@ CREATE TABLE products(
     name VARCHAR(250),
     price FLOAT,
     typeId INT,
-    CONSTRAINT fk_type FOREIGN KEY(typeId) REFERENCES TYPES(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT fk_type FOREIGN KEY(typeId) REFERENCES types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 
     INDEX (sku) 
 ) ENGINE = INNODB;
@@ -58,7 +59,7 @@ CREATE TABLE properties(
     CONSTRAINT fk_product FOREIGN KEY(productSku) REFERENCES products(sku) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = INNODB;
 # let's  insert some dummy data
-INSERT INTO TYPES(`name`)
+INSERT INTO types(`name`)
 VALUES('DVD'),('FURNITURE'),('BOOK');
 # here is the ids of types as inserted above 
 #  [
@@ -122,7 +123,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetProducts()
 BEGIN
-	SELECT p.sku , p.name , p.price , prop.name , prop.unit , prop.content FROM `products` p JOIN properties prop ON p.sku = prop.productSku ORDER BY p.sku 
+	SELECT p.sku , p.name , p.price , prop.name prop_name , prop.unit prop_unit , prop.content prop_content FROM `products` p LEFT JOIN properties prop ON p.sku = prop.productSku ORDER BY p.sku ;
 END //
 
 DELIMITER ;
@@ -147,7 +148,10 @@ BEGIN
         UUID(),
         productName,
         productPrice
-    )
+    );
+
+
+    SELECT "hi";
 END //
 
 DELIMITER ;
@@ -177,7 +181,7 @@ BEGIN
         propUnit,
         propContent,
         propProductSku
-    )
+    );
 END //
 
 DELIMITER ;

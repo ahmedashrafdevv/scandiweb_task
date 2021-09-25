@@ -1,0 +1,14 @@
+.product{
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    color:var(--font-color);
+    transition: all .3s ease-in;
+    background-color: var(--bg-product);
+    background-color: var(--bg-darker);
+    box-shadow: var(--box-shadow);
+    & > div{
+        margin: 10px 0;
+
+    }
+}
