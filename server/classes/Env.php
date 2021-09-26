@@ -12,14 +12,19 @@ class Env
     protected $path;
 
 
-    public function __construct(string $path)
+    public function __construct(string $path = null)
     {
-        // print_r($path);
-        // die;
+      
         if(!file_exists($path)) {
             throw new \InvalidArgumentException(sprintf('%s does not exist', $path));
         }
         $this->path = $path;
+
+        $this->load();
+    }
+
+    public function getHost(){
+        return "hiasd";
     }
 
     public function load() :void
@@ -29,6 +34,7 @@ class Env
         }
 
         $lines = file($this->path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        // var_dump($lines);
         foreach ($lines as $line) {
 
             if (strpos(trim($line), '#') === 0) {

@@ -1,5 +1,6 @@
 <?php
 
+
 include_once "db/connect.php";
 include_once 'inetrfaces/RequestInterface.php';
 include_once 'classes/Env.php';
@@ -7,9 +8,10 @@ include_once 'classes/Request.php';
 include_once 'classes/Router.php';
 include_once 'controllers/Controller.php';
 include_once 'controllers/ProductController.php';
+use Utils\Env;
 
 $router = new Router(new Request);
-
+(new Env(__DIR__ . '/.env'));
 
 $router->get('/', function() {
   $controller = new ProductController();
