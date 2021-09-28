@@ -8,7 +8,11 @@ class ProductModel extends Model
     private string $name;
     private float $price;
     private int $typeId;
-
+    public function setAll(string $sku ,string $name , string $price ):void{
+        $this->sku = $sku;
+        $this->name = $name;
+        $this->price = $price;
+    }
     public function getSku():STRING
     {
         return $this->sku;

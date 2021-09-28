@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Router;
 
-use Router\Exception\RouteNotFound;
+use Exception;
 use Psr\Http\Message\ServerRequestInterface;
 use Router\RouterInterface;
 
@@ -55,7 +55,7 @@ class Router implements RouterInterface
             return $route;
         }
 
-        throw new RouteNotFound(
+        throw new Exception(
             'No route found for ' . $method,
             self::NO_ROUTE
         );

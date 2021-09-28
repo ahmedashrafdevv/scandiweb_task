@@ -112,14 +112,7 @@ final class Route
         return reset($matches) ?? [];
     }
 
-    /**
-     * @deprecated use hasAttributes()
-     */
-    public function hasVars(): bool
-    {
-        return $this->hasAttributes();
-    }
-
+   
     public function hasAttributes(): bool
     {
         return $this->getVarsNames() !== [];

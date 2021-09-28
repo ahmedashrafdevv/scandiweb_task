@@ -12,8 +12,6 @@ include_once 'models/Product.php';
 include_once 'models/Property.php';
 include_once 'models/AllProduct.php';
 include_once 'router/Traits/RouteTrait.php';
-include_once 'router\Exception\RouteNotFound.php';
-include_once 'router/RouterInterface.php';
 include_once "router/Router.php";
 include_once 'router/Route.php';
 include_once 'router/UrlGenerator.php';

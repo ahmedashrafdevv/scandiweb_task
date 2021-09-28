@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Router;
 
-use Router\Exception\RouteNotFound;
 use Psr\Http\Message\ServerRequestInterface;
 
 interface RouterInterface
@@ -12,7 +11,7 @@ interface RouterInterface
     /**
      * @param ServerRequestInterface $serverRequest
      * @return Route
-     * @throws RouteNotFound if no found route.
+     * @throws Exception if no found route.
      */
     public function match(ServerRequestInterface $serverRequest): Route;
 
@@ -20,7 +19,7 @@ interface RouterInterface
      * @param string $path
      * @param string $method
      * @return Route
-     * @throws RouteNotFound if no found route.
+     * @throws Exception if no found route.
      */
     public function matchFromPath(string $path, string $method): Route;
 

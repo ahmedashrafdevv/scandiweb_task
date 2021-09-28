@@ -7,7 +7,12 @@ class PropertyModel extends Model{
     private string $unit;
     private string $content;
     private string $productSku;
-
+    public function setAll(string $name ,string $unit , string $content,string $productSku ):void{
+        $this->name = $name;
+        $this->unit = $unit;
+        $this->content = $content;
+        $this->productSku = $productSku;
+    }
     public function getName():string{
         return $this->name;
     }
