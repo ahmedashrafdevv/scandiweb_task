@@ -9,7 +9,7 @@ class Env
      *
      * @var string
      */
-    protected $path;
+    protected string $path;
 
 
     public function __construct(string $path = null)
@@ -22,11 +22,6 @@ class Env
 
         $this->load();
     }
-
-    public function getHost(){
-        return "hiasd";
-    }
-
     public function load() :void
     {
         if (!is_readable($this->path)) {
@@ -34,7 +29,6 @@ class Env
         }
 
         $lines = file($this->path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        // var_dump($lines);
         foreach ($lines as $line) {
 
             if (strpos(trim($line), '#') === 0) {

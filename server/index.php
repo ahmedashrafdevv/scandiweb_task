@@ -1,40 +1,58 @@
 <?php
-
-
-include_once "db/connect.php";
-include_once 'inetrfaces/RequestInterface.php';
-include_once 'classes/Env.php';
-include_once 'classes/Request.php';
-include_once 'classes/Router.php';
-include_once 'controllers/Controller.php';
-include_once 'controllers/ProductController.php';
 use Utils\Env;
 
-$router = new Router(new Request);
+include_once "db/Db.php";
+include_once 'inetrfaces/RequestInterface.php';
+include_once 'utils/Env.php';
+include_once 'controllers/Controller.php';
+include_once 'controllers/ProductController.php';
+
+include_once 'models/Model.php';
+include_once 'models/Product.php';
+include_once 'models/Property.php';
+include_once 'models/AllProduct.php';
+include_once 'router/Traits/RouteTrait.php';
+include_once 'router\Exception\RouteNotFound.php';
+include_once 'router/RouterInterface.php';
+include_once "router/Router.php";
+include_once 'router/Route.php';
+include_once 'router/UrlGenerator.php';
+include_once 'models/AllProduct.php';
 (new Env(__DIR__ . '/.env'));
-
-$router->get('/', function() {
-  $controller = new ProductController();
-  $controller->getAll();
-});
+include_once 'router/Api.php';
 
 
-$router->get('/profile', function($request) {
-  return <<<HTML
-  <h1>Profile</h1>
-HTML;
-});
 
-$router->post('/data', function($request) {
 
-  return json_encode($request->getBody());
-});
+// $router = new Router([
+//   new Route('home_page', '/', [ProductController::class , 'getAll']),
 
-// $db = new Db("localhost" , "root" , "asd@asd@" , "scandiweb_products");
-// $db = $db->connect();
-// $result = $db->query("call GetProducts()");
-// if($result){
-//     echo json_encode($result->fetch_all(MYSQLI_ASSOC));
-//     $result->close();
+// ]);
+// try {
+//   // Example
+//   // \Psr\Http\Message\ServerRequestInterface
+//   //$route = $router->match(ServerRequestFactory::fromGlobals());
+//   // OR
+
+//   // $_SERVER['REQUEST_URI'] = '/api/articles/2'
+//   // $_SERVER['REQUEST_METHOD'] = 'GET'
+//   $route = $router->matchFromPath($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+
+//   $parameters = $route->getHandler();
+//   // $arguments = ['id' => 2]
+//   $arguments = $route->getAttributes();
+
+//   $controllerName = $parameters[0];
+//   $methodName = $parameters[1] ?? null;
+
+  
+//   $controller = new $controllerName();
+//   if (!is_callable($controller)) {
+//       $controller =  [$controller, $methodName];
+//   }
+
+//   echo $controller(...array_values($arguments));
+
+// } catch (\Exception $exception) {
+//   header("HTTP/1.0 404 Not Found");
 // }
-// $db->close();

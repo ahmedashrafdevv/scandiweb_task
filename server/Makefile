@@ -1,3 +1,6 @@
+install_prerequesties:
+	sudo apt install php libapache2-mod-php
+
 migrate:
 	mysql -u root -p asd@asd@ -e "SOURCE $(pwd)db/db.sql"
 

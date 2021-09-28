@@ -1,43 +1,41 @@
 <?php
 
+namespace Models;
 
-class ProductModel
+class ProductModel extends Model
 {
     private string $sku;
     private string $name;
     private float $price;
     private int $typeId;
 
-    public function getSku()
+    public function getSku():STRING
     {
         return $this->sku;
     }
-    public function getName()
+    public function getName():STRING
     {
         return $this->name;
     }
-    public function getPrice()
+    public function getPrice():float
     {
         return $this->price;
     }
-    public function getTypeId()
-    {
-        return $this->typeId;
-    }
-    public function setSku($sku)
+    public function setSku($sku):void
     {
         $this->sku = $sku;
     }
-    public function setName($name)
+    public function setName($name):void
     {
         $this->name = $name;
     }
-    public function setPrice($price)
+    public function setPrice($price):void
     {
         $this->price = $price;
     }
-    public function setTypeId($typeId)
-    {
-        $this->typeId = $typeId;
+
+    public function create( $input):bool{
+        var_dump($this->db);
+        return true;
     }
 }
