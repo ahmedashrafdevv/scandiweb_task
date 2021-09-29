@@ -26,7 +26,7 @@ final class UrlGenerator
             );
         }
         $route = $this->routes[$name];
-        if ($route->hasVars() && $parameters === []) {
+        if ($route->hasAttributes() && $parameters === []) {
             throw new \InvalidArgumentException(
                 sprintf('%s route need parameters: %s', $name, implode(',', $route->getVarsNames()))
             );
