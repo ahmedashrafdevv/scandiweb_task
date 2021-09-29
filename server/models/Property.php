@@ -2,41 +2,29 @@
 
 namespace Models;
 
-class PropertyModel extends Model{
+class PropertyModel extends Model implements ModelInterface{
     private string $name;
     private string $unit;
     private string $content;
     private string $productSku;
-
-    public function getName():string{
-        return $this->name;
-    }
-    public function getUnit():string{
-        return $this->unit;
-    }
-    public function getContent():string{
-        return $this->content;
-    }
-    public function getProductSku():string{
-        return $this->productSku;
-    }
-
-    public function setName($name):void{
+    public function setAll(string $name ,string $unit , string $content,string $productSku ):void{
         $this->name = $name;
-    }
-    public function setUnit($unit):void{
         $this->unit = $unit;
-    }
-    public function setContent($content):void{
         $this->content = $content;
-    }
-    public function setProductSku($productSku):void{
         $this->productSku = $productSku;
     }
+    public function getAll():array{
+        return [
+            "poperty_name" => $this->name,
+            "poperty_unit" => $this->unit,
+            "poperty_content" => $this->content,
+        ];
+    }
+   
 
-    public function create($input):bool{
+    public function create($input):string{
         echo $input;
-        return true;
+        return "true";
     }
     
 

@@ -10,9 +10,5 @@ abstract class Model
     {
        $this->db = $db;
     }
-    public function create(array $input) : bool{
-       echo $input;
-        return true;
-    }
-   
+  
 }

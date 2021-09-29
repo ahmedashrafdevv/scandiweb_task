@@ -6,7 +6,7 @@ use Db\Db;
 
 $router = new Router([
   new Route('home_page', '/', [ProductController::class , 'getAll']),
-  new Route('create_product', '/addnew', [ProductController::class , 'create']),
+  new Route('create_product', '/addnew', [ProductController::class , 'create'] , ['POST']),
 
 ]);
 try {

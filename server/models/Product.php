@@ -2,40 +2,29 @@
 
 namespace Models;
 
-class ProductModel extends Model
+class ProductModel extends Model implements ModelInterface
 {
     private string $sku;
     private string $name;
     private float $price;
     private int $typeId;
-
-    public function getSku():STRING
-    {
-        return $this->sku;
-    }
-    public function getName():STRING
-    {
-        return $this->name;
-    }
-    public function getPrice():float
-    {
-        return $this->price;
-    }
-    public function setSku($sku):void
-    {
+    public function setAll(string $sku ,string $name , string $price ):void{
         $this->sku = $sku;
-    }
-    public function setName($name):void
-    {
         $this->name = $name;
-    }
-    public function setPrice($price):void
-    {
         $this->price = $price;
     }
+   
+    public function getAll():array{
+        return [
+            "sku" => $this->sku,
+            "name" => $this->name,
+            "price" => $this->price,
+        ];
+    }
+   
 
-    public function create( $input):bool{
+    public function create($input):string{
         var_dump($this->db);
-        return true;
+        return "true";
     }
 }
