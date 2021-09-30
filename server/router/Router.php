@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Router;
 
 use Exception;
-use Psr\Http\Message\ServerRequestInterface;
-use Router\RouterInterface;
+use Router\Exception\RouteNotFound;
 
 class Router implements RouterInterface
 {
@@ -41,11 +40,6 @@ class Router implements RouterInterface
         return $this;
     }
 
-    public function match(ServerRequestInterface $serverRequest): Route
-    {
-        return $this->matchFromPath($serverRequest->getUri()->getPath(), $serverRequest->getMethod());
-    }
-
     public function matchFromPath(string $path, string $method): Route
     {
         foreach ($this->routes as $route) {
@@ -55,10 +49,7 @@ class Router implements RouterInterface
             return $route;
         }
 
-        throw new Exception(
-            'No route found for ' . $method,
-            self::NO_ROUTE
-        );
+        http_response_code(404);
     }
 
     public function generateUri(string $name, array $parameters = []): string

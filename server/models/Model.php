@@ -3,7 +3,7 @@ namespace Models;
 
 use PDO;
 
-abstract class Model
+class Model
 {
     protected  $db;
     public function __construct(PDO $db)

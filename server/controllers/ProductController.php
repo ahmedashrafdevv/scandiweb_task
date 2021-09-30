@@ -1,21 +1,20 @@
 <?php
 namespace Controllers;
 
-use Models\AllProduct;
 use Models\PropertyModel;
 use Models\ProductModel;
+use Utils\Validation;
 
 class ProductController extends Controller
 {
+  
   public  function  getAll():string     
   {
-    $allProduct = new  AllProduct($this->getDb());
-    return json_encode($allProduct->fetchAll());
+    return json_encode($this->repository->fetchAll());
   }
-  public function create():bool
+  public function create():string
   {
     $data =$this->requestBody;
-    var_dump($data);
-    return true;
+    return  $this->repository->create($data);
   }
 }

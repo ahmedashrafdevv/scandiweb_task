@@ -1,25 +1,20 @@
 <?php
 namespace Controllers;
 
-use Db\Db;
-use PDO;
+use Repositories\db\ProductRepository;
 
 abstract class Controller{
-   private Db $db ;
    protected  array $requestBody ;
-   protected PDO $pdo ;
+   protected ProductRepository $repository;
    public function __construct()
    {
-      $db = new Db();
-      $this->db = $db;
-      $this->pdo = $this->db->getConnection(); 
-      if( is_array( json_decode(file_get_contents('php://input'), true)))
-         $this->requestBody =  json_decode(file_get_contents('php://input'), true);
+      $this->repository = new  ProductRepository();
+      $body = json_decode(file_get_contents('php://input'), true);
+      $this->requestBody = is_array($body) ?
+              json_decode(file_get_contents('php://input'), true)
+         :
+           [];
    }
 
-   public function getDb():PDO
-   {    
-      return  $this->pdo;
-   }
   
 }

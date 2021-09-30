@@ -2,29 +2,54 @@
 
 namespace Models;
 
+use Exception;
+use ReflectionClass;
+
 class ProductModel extends Model implements ModelInterface
 {
-    private string $sku;
+    private string $sku = "";
     private string $name;
     private float $price;
-    private int $typeId;
-    public function setAll(string $sku ,string $name , string $price ):void{
+    private int $type_id = 0;
+
+    public function __construct(array $record){
+        $this->name = $record['name'];
+        $this->price = $record['price']; 
+        if(isset($record['sku']))
+            $this->sku = $record['sku']; 
+        if(isset($record['type_id']))
+            $this->type_id = $record['type_id']; 
+        
+    }
+
+    public function setSku(string $sku):void{
         $this->sku = $sku;
-        $this->name = $name;
-        $this->price = $price;
+    }
+
+    public function getName():string{
+        return $this->name;
+    }
+    public function getSku():string{
+        return $this->sku;
+    }
+    public function getPrice():float{
+        return $this->price;
+    }
+    public function getTypeId():int{
+        return $this->type_id;
     }
    
     public function getAll():array{
-        return [
+        $product = [
             "sku" => $this->sku,
             "name" => $this->name,
             "price" => $this->price,
         ];
-    }
-   
 
-    public function create($input):string{
-        var_dump($this->db);
+        return $product;
+    }
+
+    public function create():string{
         return "true";
     }
 }

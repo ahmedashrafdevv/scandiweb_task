@@ -2,28 +2,37 @@
 
 namespace Models;
 
+use ReflectionClass;
+
 class PropertyModel extends Model implements ModelInterface{
-    private string $name;
-    private string $unit;
-    private string $content;
-    private string $productSku;
-    public function setAll(string $name ,string $unit , string $content,string $productSku ):void{
-        $this->name = $name;
-        $this->unit = $unit;
-        $this->content = $content;
-        $this->productSku = $productSku;
+    private string $prop_name;
+    private string $prop_unit;
+    private string $prop_content;
+    public function __construct(array $record){
+        $this->prop_name = $record['prop_name'];
+        $this->prop_unit = $record['prop_unit'];
+        $this->prop_content = $record['prop_content'];
     }
     public function getAll():array{
         return [
-            "poperty_name" => $this->name,
-            "poperty_unit" => $this->unit,
-            "poperty_content" => $this->content,
+            "prop_name" => $this->prop_name,
+            "prop_unit" => $this->prop_unit,
+            "prop_content" => $this->prop_content,
         ];
     }
-   
 
-    public function create($input):string{
-        echo $input;
+    public function getPropName():string{
+        return $this->prop_name;
+    }
+    public function getPropUnit():string{
+        return $this->prop_unit;
+    }
+    public function getPropContent():string{
+        return $this->prop_content;
+    }
+
+    public function create():string{
+        // echo "Asd";
         return "true";
     }
     

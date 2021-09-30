@@ -6,7 +6,19 @@ namespace Composer\Autoload;
 
 class ComposerStaticInita71069ba2ce3bfa12aaa8e7919b81308
 {
+    public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\VarDumper\\' => 28,
+        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -14,6 +26,18 @@ class ComposerStaticInita71069ba2ce3bfa12aaa8e7919b81308
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Php80\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Component\\VarDumper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-dumper',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -21,7 +45,24 @@ class ComposerStaticInita71069ba2ce3bfa12aaa8e7919b81308
     );
 
     public static $classMap = array (
+        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Controllers\\Controller' => __DIR__ . '/../..' . '/controllers/Controller.php',
+        'Controllers\\ProductController' => __DIR__ . '/../..' . '/controllers/ProductController.php',
+        'Db\\Db' => __DIR__ . '/../..' . '/db/Db.php',
+        'Repositories\\db\\ProductRepository' => __DIR__ . '/../..' . '/repositories/db/ProductRepository.php',
+        'Router\\Exception\\RouteNotFound' => __DIR__ . '/../..' . '/router/Exception/RouteNotFound.php',
+        'Router\\Route' => __DIR__ . '/../..' . '/router/Route.php',
+        'Router\\Router' => __DIR__ . '/../..' . '/router/Router.php',
+        'Router\\RouterInterface' => __DIR__ . '/../..' . '/router/RouterInterface.php',
+        'Router\\Traits\\RouteTrait' => __DIR__ . '/../..' . '/router/Traits/RouteTrait.php',
+        'Router\\UrlGenerator' => __DIR__ . '/../..' . '/router/UrlGenerator.php',
+        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+        'Utils\\Env' => __DIR__ . '/../..' . '/utils/Env.php',
+        'Utils\\Validation' => __DIR__ . '/../..' . '/utils/Validation.php',
+        'Utils\\ValidationInterface' => __DIR__ . '/../..' . '/utils/ValidationInterface.php',
+        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

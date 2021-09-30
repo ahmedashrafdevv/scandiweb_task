@@ -29,15 +29,6 @@ final class Route
      */
     private $handler;
 
-    /**
-     * @var array<string>
-     */
-    private $methods = [];
-
-    /**
-     * @var array<string>
-     */
-    private $attributes = [];
 
     /**
      * Route constructor.
@@ -110,18 +101,5 @@ final class Route
     {
         preg_match_all('/{[^}]*}/', $this->path, $matches);
         return reset($matches) ?? [];
-    }
-
-   
-    public function hasAttributes(): bool
-    {
-        return $this->getVarsNames() !== [];
-    }
-    /**
-     * @return array<string>
-     */
-    public function getAttributes(): array
-    {
-        return $this->attributes;
     }
 }

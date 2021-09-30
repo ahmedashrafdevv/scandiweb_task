@@ -6,5 +6,22 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Controllers\\Controller' => $baseDir . '/controllers/Controller.php',
+    'Controllers\\ProductController' => $baseDir . '/controllers/ProductController.php',
+    'Db\\Db' => $baseDir . '/db/Db.php',
+    'Repositories\\db\\ProductRepository' => $baseDir . '/repositories/db/ProductRepository.php',
+    'Router\\Exception\\RouteNotFound' => $baseDir . '/router/Exception/RouteNotFound.php',
+    'Router\\Route' => $baseDir . '/router/Route.php',
+    'Router\\Router' => $baseDir . '/router/Router.php',
+    'Router\\RouterInterface' => $baseDir . '/router/RouterInterface.php',
+    'Router\\Traits\\RouteTrait' => $baseDir . '/router/Traits/RouteTrait.php',
+    'Router\\UrlGenerator' => $baseDir . '/router/UrlGenerator.php',
+    'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+    'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+    'Utils\\Env' => $baseDir . '/utils/Env.php',
+    'Utils\\Validation' => $baseDir . '/utils/Validation.php',
+    'Utils\\ValidationInterface' => $baseDir . '/utils/ValidationInterface.php',
+    'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );

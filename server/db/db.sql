@@ -41,8 +41,8 @@ CREATE TABLE products(
     sku VARCHAR(36) PRIMARY KEY,
     name VARCHAR(250),
     price FLOAT,
-    typeId INT,
-    CONSTRAINT fk_type FOREIGN KEY(typeId) REFERENCES types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    `type_id` INT,
+    CONSTRAINT fk_type FOREIGN KEY(`type_id`) REFERENCES types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 
     INDEX (sku) 
 ) ENGINE = INNODB;
@@ -53,10 +53,10 @@ CREATE TABLE products(
 # it will always be attached with products
 CREATE TABLE properties(
     name VARCHAR(250),
-    unit VARCHAR(10) UNIQUE,
-    content VARCHAR(100) UNIQUE,
-    productSku VARCHAR(36),
-    CONSTRAINT fk_product FOREIGN KEY(productSku) REFERENCES products(sku) ON DELETE RESTRICT ON UPDATE RESTRICT
+    unit VARCHAR(10),
+    content VARCHAR(100),
+    product_sku VARCHAR(36),
+    CONSTRAINT fk_product FOREIGN KEY(product_sku) REFERENCES products(sku) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = INNODB;
 # let's  insert some dummy data
 INSERT INTO types(`name`)
@@ -68,7 +68,7 @@ VALUES('DVD'),('FURNITURE'),('BOOK');
 #       3 , BOOK
 #   ]
 
-INSERT INTO products(sku, name, price, typeId)
+INSERT INTO products(sku, name, price, `type_id`)
 VALUES
     (UUID(), 'ACME DISC', 1, 1),
     (UUID(), 'CHAIR', 40, 2),
@@ -79,7 +79,7 @@ INSERT INTO properties(
             name,
             unit,
             content,
-            productSku
+            product_sku
         )
     VALUES(
         'Size',
@@ -123,7 +123,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetProducts()
 BEGIN
-	SELECT p.sku , p.name , p.price , prop.name prop_name , prop.unit prop_unit , prop.content prop_content FROM `products` p LEFT JOIN properties prop ON p.sku = prop.productSku ORDER BY p.sku ;
+	SELECT p.sku , p.name , p.price , prop.name prop_name , prop.unit prop_unit , prop.content prop_content FROM `products` p LEFT JOIN properties prop ON p.sku = prop.product_sku ORDER BY p.sku ;
 END //
 
 DELIMITER ;
@@ -134,24 +134,29 @@ DELIMITER //
 
 CREATE PROCEDURE CreateProduct(
     IN productName varchar(250) ,
-    IN productPrice FLOAT
+    IN productPrice FLOAT , 
+    IN productTypeId int
 )
 BEGIN
+    DECLARE uuid VARCHAR(36);
+    SET uuid = UUID();
 	INSERT INTO products 
     (
         sku,
         name,
-        price
+        price,
+        `type_id`
     ) 
     VALUES 
     (
-        UUID(),
+        uuid,
         productName,
-        productPrice
+        productPrice,
+        productTypeId
     );
 
 
-    SELECT "hi";
+    SELECT uuid;
 END //
 
 DELIMITER ;
@@ -173,7 +178,7 @@ BEGIN
         name,
         unit,
         content,
-        productSku
+        product_sku
     ) 
     VALUES 
     (
