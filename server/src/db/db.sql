@@ -135,7 +135,10 @@ DELIMITER //
 CREATE PROCEDURE CreateProduct(
     IN productName varchar(250) ,
     IN productPrice FLOAT , 
-    IN productTypeId int
+    IN productTypeId int , 
+    IN propName varchar(250) ,
+    IN propUnit varchar(10) ,
+    IN propContent varchar(100)
 )
 BEGIN
     DECLARE uuid VARCHAR(36);
@@ -155,25 +158,7 @@ BEGIN
         productTypeId
     );
 
-
-    SELECT uuid;
-END //
-
-DELIMITER ;
-
-
-# create property procedure will be called to create a  new prop  to an existing product
-# it will takes PRODUCT sku as a parameter
-DELIMITER //
-
-CREATE PROCEDURE CreateProperty(
-    IN propName varchar(250) ,
-    IN propUnit varchar(10) ,
-    IN propContent varchar(100) ,
-    IN propProductSku varchar(36) 
-)
-BEGIN
-	INSERT INTO properties 
+    INSERT INTO properties 
     (
         name,
         unit,
@@ -185,10 +170,25 @@ BEGIN
         propName,
         propUnit,
         propContent,
-        propProductSku
+        uuid
     );
+
+
+    SELECT uuid;
 END //
 
 DELIMITER ;
 
 
+
+
+
+# create product procedure will be called to create a  new product
+DELIMITER //
+
+CREATE PROCEDURE GetTypes()
+BEGIN
+    SELECT id , name FROM types;
+END //
+
+DELIMITER ;

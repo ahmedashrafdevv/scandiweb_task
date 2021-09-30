@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Router;
+namespace App;
 
-use Exception;
-use Router\Exception\RouteNotFound;
+
 
 class Router implements RouterInterface
 {

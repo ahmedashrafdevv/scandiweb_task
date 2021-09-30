@@ -1,9 +1,6 @@
 <?php
-namespace Controllers;
+namespace App;
 
-use Models\PropertyModel;
-use Models\ProductModel;
-use Utils\Validation;
 
 class ProductController extends Controller
 {

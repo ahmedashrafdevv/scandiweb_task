@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils;
+namespace App;
 
 class Validation implements ValidationInterface {
     public static function validationHelper($fields , $request):string{

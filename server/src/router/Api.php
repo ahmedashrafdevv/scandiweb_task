@@ -1,10 +1,9 @@
 <?php
 
-namespace Router;
+namespace App;
 
-use Controllers\ProductController;
-use Db\Db;
-use Exception;
+use App\ProductController;
+use App\Db;
 
 class Api extends Router
 {

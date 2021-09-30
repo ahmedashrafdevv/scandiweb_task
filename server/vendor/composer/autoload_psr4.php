@@ -10,4 +10,5 @@ return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
+    'App\\' => array($baseDir . '/src'),
 );

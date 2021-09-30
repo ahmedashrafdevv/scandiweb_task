@@ -1,8 +1,7 @@
 <?php
 
-namespace Models;
+namespace App;
 
-use ReflectionClass;
 
 class PropertyModel extends Model implements ModelInterface{
     private string $prop_name;

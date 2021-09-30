@@ -1,8 +1,8 @@
 <?php
 
-namespace Router\Traits;
+namespace App;
 
-use Router\Route as BaseRoute;
+use App\Route as BaseRoute;
 
 trait RouteTrait
 {

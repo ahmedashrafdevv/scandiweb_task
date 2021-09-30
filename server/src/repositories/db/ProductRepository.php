@@ -1,13 +1,14 @@
 <?php
 
-namespace Repositories\db;
+namespace App;
 
-use Db\Db;
-use Exception;
-use Models\ProductModel;
-use Models\PropertyModel;
+use App\Db;
+use App\Exception;
+use App\ProductModel;
+use App\PropertyModel;
 use PDO;
-use Utils\Validation;
+use App\Validation;
+use Exception as GlobalException;
 
 class ProductRepository
 {
@@ -33,11 +34,25 @@ class ProductRepository
     }
     return $products;
   }
+  public function GetTypes()
+  {
+    $sql = "call GetTypes();";
+    $stmt = $this->db->query($sql);
+    if (!$stmt) {
+      die("Execute query error, because: " . print_r($this->db->errorInfo()[0], true));
+    }
+    $types = [];
+    while ($row = $stmt->fetch()) {
+      $type = new TypeModel($row);
+      array_push($types,  $type);
+    }
+    return $types;
+  }
   protected function _insertDb(string $query ,array $params){
     $stmt = $this->db->prepare($query);
       $stmt->execute($params);
       if (isset( $stmt->errorInfo()[2])){
-        throw new Exception("Error while inserting to db:", $stmt->errorInfo()[2]);
+        throw new GlobalException("Error while inserting to db:", json_encode($stmt->errorInfo()[2]));
       }
       return $stmt->fetch();
   }
@@ -56,16 +71,10 @@ class ProductRepository
       return $error;
     }
     //create product
+    $sql = "call CreateProduct(? , ? , ? , ? , ? , ?);";
     $product = new ProductModel($data);
-    $sql = "call CreateProduct(? , ? , ? , ?);";
-    $stmt = $this->_insertDb($sql , [$product->getName(),$product->getPrice(), $product->getTypeId() , 12121]);
-
-
-    $sku = $stmt['uuid'];   
     $prop = new PropertyModel($data);
-    $sql = "call CreateProperty(? , ? , ? , ? );";
-    $stmt = $this->_insertDb($sql , [$prop->getPropName(),$prop->getPropUnit(), $prop->getPropContent() , $sku]);
-
+    $stmt = $this->_insertDb($sql , [$product->getName(),$product->getPrice(), $product->getTypeId() , $prop->getPropName(),$prop->getPropUnit(), $prop->getPropContent()]);
     return "product created successfully";
   }
 }

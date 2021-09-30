@@ -1,7 +1,7 @@
 <?php
-namespace Controllers;
+namespace App;
 
-use Repositories\db\ProductRepository;
+use App\ProductRepository;
 
 abstract class Controller{
    protected  array $requestBody ;

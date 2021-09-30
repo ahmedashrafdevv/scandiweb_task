@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Router;
+namespace App;
 
-use Router\Route;
+use App\Route;
 
 final class UrlGenerator
 {
@@ -26,11 +26,7 @@ final class UrlGenerator
             );
         }
         $route = $this->routes[$name];
-        if ($route->hasAttributes() && $parameters === []) {
-            throw new \InvalidArgumentException(
-                sprintf('%s route need parameters: %s', $name, implode(',', $route->getVarsNames()))
-            );
-        }
+       
         return self::resolveUri($route, $parameters);
     }
 

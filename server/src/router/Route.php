@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Router;
+namespace App;
 
-use Router\Traits\RouteTrait;
+use App\RouteTrait;
 
 /**
  * Class Route

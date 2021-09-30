@@ -23,6 +23,10 @@ class ComposerStaticInita71069ba2ce3bfa12aaa8e7919b81308
         array (
             'Psr\\Http\\Message\\' => 17,
         ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -42,26 +46,17 @@ class ComposerStaticInita71069ba2ce3bfa12aaa8e7919b81308
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
     );
 
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Controllers\\Controller' => __DIR__ . '/../..' . '/controllers/Controller.php',
-        'Controllers\\ProductController' => __DIR__ . '/../..' . '/controllers/ProductController.php',
-        'Db\\Db' => __DIR__ . '/../..' . '/db/Db.php',
-        'Repositories\\db\\ProductRepository' => __DIR__ . '/../..' . '/repositories/db/ProductRepository.php',
-        'Router\\Exception\\RouteNotFound' => __DIR__ . '/../..' . '/router/Exception/RouteNotFound.php',
-        'Router\\Route' => __DIR__ . '/../..' . '/router/Route.php',
-        'Router\\Router' => __DIR__ . '/../..' . '/router/Router.php',
-        'Router\\RouterInterface' => __DIR__ . '/../..' . '/router/RouterInterface.php',
-        'Router\\Traits\\RouteTrait' => __DIR__ . '/../..' . '/router/Traits/RouteTrait.php',
-        'Router\\UrlGenerator' => __DIR__ . '/../..' . '/router/UrlGenerator.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-        'Utils\\Env' => __DIR__ . '/../..' . '/utils/Env.php',
-        'Utils\\Validation' => __DIR__ . '/../..' . '/utils/Validation.php',
-        'Utils\\ValidationInterface' => __DIR__ . '/../..' . '/utils/ValidationInterface.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 
