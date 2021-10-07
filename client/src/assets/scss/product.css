@@ -3,12 +3,29 @@
   border: 1px solid var(--border-color);
   text-align: center;
   color: var(--font-color);
+  -webkit-transition: all .3s ease-in;
   transition: all .3s ease-in;
   background-color: var(--bg-product);
   background-color: var(--bg-darker);
-  box-shadow: var(--box-shadow);
+  -webkit-box-shadow: var(--box-shadow);
+          box-shadow: var(--box-shadow);
+  cursor: pointer;
+}
+
+@media (min-width: 970px) {
+  .product {
+    -webkit-transition: -webkit-transform .3s ease-in;
+    transition: -webkit-transform .3s ease-in;
+    transition: transform .3s ease-in;
+    transition: transform .3s ease-in, -webkit-transform .3s ease-in;
+  }
+  .product:hover {
+    -webkit-transform: scale(1.08);
+            transform: scale(1.08);
+  }
 }
 
 .product > div {
   margin: 10px 0;
 }
+/*# sourceMappingURL=product.css.map */

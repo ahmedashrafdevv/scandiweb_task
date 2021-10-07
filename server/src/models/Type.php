@@ -10,5 +10,13 @@ class TypeModel extends Model{
         $this->id = $record['id'];
         $this->name = $record['name']; 
     }
+
+
+    public function getAll():array{
+        return [
+            "id" => $this->id,
+            "name" => $this->name
+        ];
+    }
    
 }

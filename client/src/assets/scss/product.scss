@@ -7,6 +7,13 @@
     background-color: var(--bg-product);
     background-color: var(--bg-darker);
     box-shadow: var(--box-shadow);
+    cursor: pointer;
+    @media(min-width: 970px){
+        transition: transform .3s ease-in;
+        &:hover{
+            transform: scale(1.08);
+        }
+    }
     & > div{
         margin: 10px 0;
 

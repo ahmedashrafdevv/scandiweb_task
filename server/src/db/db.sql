@@ -23,15 +23,13 @@
     #productId  INT
     # relations
     # every property has one product
-DROP
-    DATABASE IF EXISTS scandiweb_products;
-CREATE DATABASE scandiweb_products;
-USE scandiweb_products;
 # here we are creating the product types table with very simple schema just store the name
 # and now we can create as many types as we can and attach them to the products simply
 CREATE TABLE types(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(250)
+    `name` VARCHAR(250),
+    prop_name varchar(100)
+    prop_unit varchar(100)
 ) ENGINE = INNODB;
 # here we are creating the products table
 # we  will store sku as binary and reurn it in redable way on select
@@ -42,25 +40,15 @@ CREATE TABLE products(
     name VARCHAR(250),
     price FLOAT,
     `type_id` INT,
-    CONSTRAINT fk_type FOREIGN KEY(`type_id`) REFERENCES types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    prop_content VARCHAR(100),
+    CONSTRAINT fk_type FOREIGN KEY(`type_id`) REFERENCES types(id) ON DELETE SET NULL ON UPDATE SET NULL,
 
     INDEX (sku) 
 ) ENGINE = INNODB;
-# here we are creating the products table
-# this table will be responsible for creating properties as many as we like to any specific product
-# [NOTE] i didn't add a primary key to this table 
-# because i dont think at any time this project may need to list properties based on there ids
-# it will always be attached with products
-CREATE TABLE properties(
-    name VARCHAR(250),
-    unit VARCHAR(10),
-    content VARCHAR(100),
-    product_sku VARCHAR(36),
-    CONSTRAINT fk_product FOREIGN KEY(product_sku) REFERENCES products(sku) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = INNODB;
+
 # let's  insert some dummy data
-INSERT INTO types(`name`)
-VALUES('DVD'),('FURNITURE'),('BOOK');
+INSERT INTO types(`name` , prop_name , prop_unit)
+VALUES('DVD' , 'size'  , 'mb'),('FURNITURE' , 'Dimensions' , 'HxWxL' ),('BOOK'  , 'Weight' , 'kg');
 # here is the ids of types as inserted above 
 #  [
 #       1 , DVD
@@ -68,54 +56,12 @@ VALUES('DVD'),('FURNITURE'),('BOOK');
 #       3 , BOOK
 #   ]
 
-INSERT INTO products(sku, name, price, `type_id`)
+INSERT INTO products(sku, name, price, `type_id` , prop_content)
 VALUES
-    (UUID(), 'ACME DISC', 1, 1),
-    (UUID(), 'CHAIR', 40, 2),
-    (UUID(), 'WAR AND PEACE', 20, 3);
+    (UUID(), 'ACME DISC', 1, 1 , '20'),
+    (UUID(), 'CHAIR', 40, 2 , '24X24X24'),
+    (UUID(), 'WAR AND PEACE', 20, '.5');
         
-        
-INSERT INTO properties(
-            name,
-            unit,
-            content,
-            product_sku
-        )
-    VALUES(
-        'Size',
-        'MB',
-        '700',
-    (SELECT
-        sku
-    FROM
-        products
-    LIMIT 1)
-    ),
-    (
-        'Weight',
-        'KG',
-        '2',
-    (SELECT
-        sku
-    FROM
-        products
-    LIMIT 1 OFFSET 1)
-    ),
-    (
-        'Dimensions',
-        'HxWxL',
-        '24x45x15',
-    (SELECT
-        sku
-    FROM
-        products
-    LIMIT 1 OFFSET 2)
-    );
-
-
-
-
-
 # now lets create our procedures logic
 
 # get products procedure will be called to load all the products from the database at once
@@ -136,8 +82,6 @@ CREATE PROCEDURE CreateProduct(
     IN productName varchar(250) ,
     IN productPrice FLOAT , 
     IN productTypeId int , 
-    IN propName varchar(250) ,
-    IN propUnit varchar(10) ,
     IN propContent varchar(100)
 )
 BEGIN
@@ -148,32 +92,17 @@ BEGIN
         sku,
         name,
         price,
-        `type_id`
+        `type_id`,
+        prop_content
     ) 
     VALUES 
     (
         uuid,
         productName,
         productPrice,
-        productTypeId
+        productTypeId,
+        propContent
     );
-
-    INSERT INTO properties 
-    (
-        name,
-        unit,
-        content,
-        product_sku
-    ) 
-    VALUES 
-    (
-        propName,
-        propUnit,
-        propContent,
-        uuid
-    );
-
-
     SELECT uuid;
 END //
 
@@ -188,7 +117,19 @@ DELIMITER //
 
 CREATE PROCEDURE GetTypes()
 BEGIN
-    SELECT id , name FROM types;
+    SELECT id , name , prop_name , prop_unit FROM types;
+END //
+
+DELIMITER ;
+
+
+
+# delete product procedure will be called to create a  new product
+DELIMITER //
+
+CREATE PROCEDURE DeleteProducts(IN productSku VARCHAR(36))
+BEGIN
+    DELETE FROM products WHERE sku = productSku
 END //
 
 DELIMITER ;

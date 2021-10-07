@@ -1,32 +1,71 @@
 
-import { BaseModel } from "./BaseModel";
 
-export class Product extends BaseModel {
-  private name: string;
-  private price: number;
+import {Product}  from "./Product";
+export class ProductModel{
+  product:Product
 
-  constructor(sku: string , name: string , price: number) {
-    super(sku);
-    this.name = name;
-    this.price = price;
+  
+  constructor(response : any) {
+   
+    this.product = {
+      sku : response.sku,
+      name : response.name,
+      price : response.price,
+      prop_name : response.prop_name,
+      prop_content : response.prop_content,
+      prop_unit : response.prop_unit,
+      checked : false
+    }
   }
 
 
   // getters
+  getSku(): string{
+    return this.product.sku
+  }
   getName(): string{
-    return this.name
+    return this.product.name
+  }
+  getPrice(): number{
+    return this.product.price
+  }
+  getPropName(): string{
+    return this.product.prop_name
+  }
+  getPropContent(): string{
+    return this.product.prop_content
+  }
+  getPropUnit(): string{
+    return this.product.prop_unit
+  }
+  getChecked(): boolean{
+    return this.product.checked
   }
 
-  getPrice(): number{
-    return this.price
-  }
+  
+  
 
   // setters
-  setName(name:string): void{
-    this.name = name
+  setSku(sku:string):void{
+     this.product.sku = sku
   }
-  setPrice(price:number): void{
-    this.price = price
+  setName(name:string):void{
+     this.product.name = name
+  }
+  setPrice(price:number):void{
+     this.product.price = price
+  }
+  setPropName(prop_name:string):void{
+     this.product.prop_name = prop_name
+  }
+  setPropContent(prop_content:string):void{
+     this.product.prop_content = prop_content
+  }
+  setPropUnit(prop_unit:string):void{
+     this.product.prop_unit = prop_unit
+  }
+  setChecked(checked:boolean):void{
+     this.product.checked = checked
   }
 }
 

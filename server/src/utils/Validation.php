@@ -18,7 +18,7 @@ class Validation implements ValidationInterface {
 
     public static function required(string $key , array $request):string{
         if(!array_key_exists($key , $request))
-            return "$key is   required";
+            return "$key is required";
         
         
         return "";

@@ -9,9 +9,21 @@ class ProductController extends Controller
   {
     return json_encode($this->repository->fetchAll());
   }
+
+  public  function  getTypes():string     
+  {
+    return json_encode($this->repository->getTypes());
+  }
   public function create():string
   {
     $data =$this->requestBody;
     return  $this->repository->create($data);
+  }
+
+  public function delete(array $skus)
+  {
+    foreach ($skus as $sku){
+      $this->repository->delete($sku);
+    }
   }
 }

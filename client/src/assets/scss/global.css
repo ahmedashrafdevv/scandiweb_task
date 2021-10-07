@@ -1,17 +1,28 @@
 body {
-  overflow: hidden;
   padding: 0;
   margin: 0;
   min-width: 100vw;
   min-height: 100vh;
+}
+
+body .wrapper {
   background-color: var(--bg-color);
-  transition: background-color .3s ease-in;
+  color: var(--font-color);
+  font-family: Candara, sans-serif;
+  -webkit-transition: background-color 0.3s ease-in;
+  transition: background-color 0.3s ease-in;
 }
 
 body .loading {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background-color: #fff;
   height: 100vh;
 }
@@ -20,6 +31,12 @@ body .container {
   padding: 12px;
   margin-right: auto;
   margin-left: auto;
+}
+
+@media (min-width: 1904px) {
+  body .container {
+    max-width: 1785px;
+  }
 }
 
 @media (min-width: 1246px) {
@@ -35,11 +52,19 @@ body .container {
 }
 
 body .nav {
-  display: flex;
-  justify-content: space-between;
   padding: 10px 0;
   background-color: var(--bg-darker);
-  box-shadow: var(--box-shadow);
+  -webkit-box-shadow: var(--box-shadow);
+          box-shadow: var(--box-shadow);
+}
+
+body .nav__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 body .nav .logo {
@@ -48,19 +73,26 @@ body .nav .logo {
 
 body .nav .logo svg {
   fill: var(--font-color);
-  transition: fill .3s ease-in;
+  -webkit-transition: fill 0.3s ease-in;
+  transition: fill 0.3s ease-in;
 }
 
 body .nav .mode-switcher {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: var(--font-color);
-  transition: color .3s ease-in;
+  -webkit-transition: color 0.3s ease-in;
+  transition: color 0.3s ease-in;
   cursor: pointer;
 }
 
 body .nav .mode-switcher svg {
-  transition: fill .3s ease-in;
+  -webkit-transition: fill 0.3s ease-in;
+  transition: fill 0.3s ease-in;
   margin-right: 10px;
   fill: var(--font-color);
 }
@@ -78,6 +110,91 @@ body footer {
   text-align: center;
   color: var(--font-color);
   background-color: var(--bg-darker);
-  box-shadow: var(--box-shadow);
-  transition: color .3s ease-in;
+  -webkit-box-shadow: var(--box-shadow);
+          box-shadow: var(--box-shadow);
+  -webkit-transition: color 0.3s ease-in;
+  transition: color 0.3s ease-in;
 }
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid var(--border-color);
+  -webkit-box-shadow: 4px 4px 19px var(--bg-darker);
+          box-shadow: 4px 4px 19px var(--bg-darker);
+  cursor: pointer;
+  color: #fffefe;
+  font-size: 16px;
+  text-transform: uppercase;
+  -webkit-transition: -webkit-transform 0.3s ease-in;
+  transition: -webkit-transform 0.3s ease-in;
+  transition: transform 0.3s ease-in;
+  transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
+  border-radius: 5px;
+}
+
+.btn:not(:last-child) {
+  margin-right: 10px;
+}
+
+.btn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.btn:active {
+  -webkit-transform: scale(0.9) !important;
+          transform: scale(0.9) !important;
+}
+
+.btn.danger {
+  background-color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+.btn.success {
+  background-color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.input label {
+  font-size: 24px;
+  text-transform: capitalize;
+  color: var(--font-color);
+  margin-right: 20px;
+}
+
+.input input,
+.input select {
+  padding: 20px;
+  margin: 20px 0;
+  border: 2px solid var(--border-color);
+  width: 100%;
+  font-size: 18px;
+  background-color: var(--bg-darker);
+  color: var(--font-color);
+  border-radius: 10px;
+  outline: none !important;
+}
+
+.input input:active, .input input:focus,
+.input select:active,
+.input select:focus {
+  border-color: var(--primary-color);
+}
+
+.input option {
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
+  padding: 20px 10px;
+}
+/*# sourceMappingURL=global.css.map */

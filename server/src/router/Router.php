@@ -8,8 +8,6 @@ namespace App;
 
 class Router implements RouterInterface
 {
-    private const NO_ROUTE = 404;
-
     /**
      * @var \ArrayObject<Route>
      */
@@ -26,6 +24,7 @@ class Router implements RouterInterface
      */
     public function __construct(array $routes = [])
     {
+        header("Access-Control-Allow-Origin: *");
         $this->routes = new \ArrayObject();
         $this->urlGenerator = new UrlGenerator($this->routes);
         foreach ($routes as $route) {
