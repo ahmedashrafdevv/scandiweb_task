@@ -21,35 +21,4 @@
         grid-template-columns: repeat(3, 1fr);
   }
 }
-
-.page-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.page-header .btns {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-@media (max-width: 490px) {
-  .page-header .btns {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .page-header .btns .btn {
-    margin-bottom: 10px;
-    width: 100%;
-  }
-}
 /*# sourceMappingURL=list.css.map */

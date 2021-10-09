@@ -12,17 +12,17 @@ class Db
     private string $dbpass;
     private string $dbname;
     private PDO $conn;
-    public function __construct() {
+    public function __construct()
+    {
         //  dd("hi");
         $this->dbhost = getenv("DB_HOST");
         $this->dbuser = getenv("DB_USER");
         $this->dbpass = getenv("DB_PASSWORD");
         $this->dbname = getenv("DB_NAME");
-        
-        
+
+
         // connect to db
         $this->conn = $this->_connect();
-
     }
 
     private function _connect()
@@ -41,7 +41,6 @@ class Db
     {
         // dd(getenv("DB_NAME"));
         return $this->conn;
-        
     }
 
 
@@ -51,5 +50,34 @@ class Db
         $sql = "SET foreign_key_checks = 0;TRUNCATE TABLE products";
         $stmt  = $this->conn->prepare($sql);
         $stmt->execute();
+    }
+
+    public function queryDb(String $sql)
+    {
+        $stmt = $this->conn->query($sql);
+        $error = $this->_checkError();
+        if ($error != null) {
+            return $error;
+        }
+        return $stmt->fetch();
+    }
+    private function _checkError()
+    {
+        if (isset($this->conn->errorInfo()[2])) {
+            header("HTTP/1.0 500 internal server error");
+            return json_encode($this->conn->errorInfo()[2]);
+        }
+        return null;
+    }
+
+    public function insertDb(String $sql, array $args): string
+    {
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($args);
+        $error = $this->_checkError();
+        if ($error != null) {
+            return $error;
+        }
+        return json_encode($stmt->fetch());
     }
 }

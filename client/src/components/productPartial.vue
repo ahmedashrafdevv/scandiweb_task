@@ -1,5 +1,5 @@
 <template>
-<div>
+<div @click.prevent="check">
   <div v-if="loading">
     loading
   </div>
@@ -25,7 +25,7 @@ import { Options, Vue } from 'vue-class-component';
 @Options({
   methods:{
     check():void{
-      this.product.setChecked(!(this.product.getChecked()))
+      this.product.checked = !this.product.checked
       console.log(this.product)
     }
   },

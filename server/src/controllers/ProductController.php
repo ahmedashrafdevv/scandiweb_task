@@ -20,10 +20,13 @@ class ProductController extends Controller
     return  $this->repository->create($data);
   }
 
-  public function delete(array $skus)
+  public function delete()
   {
-    foreach ($skus as $sku){
+    $data =$this->requestBody;
+    foreach ($data as $sku){
       $this->repository->delete($sku);
     }
+
+    return "deleted";
   }
 }

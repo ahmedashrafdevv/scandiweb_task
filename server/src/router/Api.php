@@ -14,7 +14,7 @@ class Api
       new Route('home_page', '/', [ProductController::class, 'getAll']),
       new Route('get_types', '/types', [ProductController::class, 'getTypes']),
       new Route('create_product', '/addnew', [ProductController::class, 'create'], ['POST']),
-      new Route('delete_products', '/delete', [ProductController::class, 'delete'], ['POST']),
+      new Route('delete_products', '/delete', [ProductController::class, 'delete'], ["DELETE"]),
     ]);
 
     $this->init($router);

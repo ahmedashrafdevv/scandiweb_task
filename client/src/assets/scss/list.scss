@@ -11,21 +11,4 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
-.page-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .btns{
-        display: flex;
-        @media(max-width:490px){
-            flex-direction: column;
-
-            & .btn{
-                margin-bottom: 10px;
-                width: 100%;
-            }
-        }
-    }
-}
 

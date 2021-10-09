@@ -28,7 +28,7 @@
 CREATE TABLE types(
     id INT AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(250),
-    prop_name varchar(100)
+    prop_name varchar(100),
     prop_unit varchar(100)
 ) ENGINE = INNODB;
 # here we are creating the products table
@@ -42,7 +42,6 @@ CREATE TABLE products(
     `type_id` INT,
     prop_content VARCHAR(100),
     CONSTRAINT fk_type FOREIGN KEY(`type_id`) REFERENCES types(id) ON DELETE SET NULL ON UPDATE SET NULL,
-
     INDEX (sku) 
 ) ENGINE = INNODB;
 
@@ -60,7 +59,7 @@ INSERT INTO products(sku, name, price, `type_id` , prop_content)
 VALUES
     (UUID(), 'ACME DISC', 1, 1 , '20'),
     (UUID(), 'CHAIR', 40, 2 , '24X24X24'),
-    (UUID(), 'WAR AND PEACE', 20, '.5');
+    (UUID(), 'WAR AND PEACE', 20 , 3, '.5');
         
 # now lets create our procedures logic
 
@@ -69,7 +68,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetProducts()
 BEGIN
-	SELECT p.sku , p.name , p.price , prop.name prop_name , prop.unit prop_unit , prop.content prop_content FROM `products` p LEFT JOIN properties prop ON p.sku = prop.product_sku ORDER BY p.sku ;
+	SELECT p.sku , p.name , p.price , t.prop_name , t.prop_unit , p.prop_content FROM `products` p INNER JOIN types t ON p.type_id = t.id ORDER BY p.sku ;
 END //
 
 DELIMITER ;
@@ -129,7 +128,7 @@ DELIMITER //
 
 CREATE PROCEDURE DeleteProducts(IN productSku VARCHAR(36))
 BEGIN
-    DELETE FROM products WHERE sku = productSku
+    DELETE FROM products WHERE sku = productSku;
 END //
 
 DELIMITER ;

@@ -28,12 +28,12 @@ DROP
 CREATE DATABASE scandiweb_products;
 USE scandiweb_products;
 
-source //wsl$/Ubuntu/home/dev/ahmedashrafdevv/interviews/scandiweb/scandiweb_task/server/src/db/db.sql
+source /home/dev/db.sql
 
 
 DROP
-    DATABASE IF EXISTS scandiweb_products_tes;
-CREATE DATABASE scandiweb_products_tes;
-USE scandiweb_products_tes;
+    DATABASE IF EXISTS scandiweb_products_test;
+CREATE DATABASE scandiweb_products_test;
+USE scandiweb_products_test;
 
-source //wsl$/Ubuntu/home/dev/ahmedashrafdevv/interviews/scandiweb/scandiweb_task/server/src/db/db.sql
+source /home/dev/db.sql

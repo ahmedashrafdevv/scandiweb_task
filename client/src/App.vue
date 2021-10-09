@@ -7,7 +7,7 @@
         <nav class="nav">
       <div class="container">
         <div class="nav__wrapper">
-          <div class="logo">
+          <div class="logo" @click="$router.push({name:'Home'})">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 525.45 96.54"
