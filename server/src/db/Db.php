@@ -32,6 +32,7 @@ class Db
             $conn = new PDO($dsn, $this->dbuser, $this->dbpass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
             return $conn;
         } catch (PDOException $e) {
+            header_remove(); 
             header("HTTP/1.0 500 internal server error");
             die("error while connecting to db : $e->getMessage()");
         }
@@ -59,12 +60,16 @@ class Db
         if ($error != null) {
             return $error;
         }
-        return $stmt->fetch();
+        $result = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            array_push($result,  $row);
+          }
+        return $result;
     }
     private function _checkError()
     {
         if (isset($this->conn->errorInfo()[2])) {
-            header("HTTP/1.0 500 internal server error");
+            http_response_code(500);
             return json_encode($this->conn->errorInfo()[2]);
         }
         return null;

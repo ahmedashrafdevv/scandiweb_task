@@ -24,7 +24,9 @@ class Router implements RouterInterface
      */
     public function __construct(array $routes = [])
     {
+        // allow origin to avoid cors errors on frontend
         header("Access-Control-Allow-Origin: *");
+
         $this->routes = new \ArrayObject();
         $this->urlGenerator = new UrlGenerator($this->routes);
         foreach ($routes as $route) {

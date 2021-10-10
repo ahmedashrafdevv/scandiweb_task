@@ -21,12 +21,13 @@ class ProductRepository
   public function fetchAll(): array
   {
     $sql = "call GetProducts();";
+
     $rows = $this->db->queryDb($sql);
     if(!is_array($rows)){
       return $rows;
     }
     $products = [];
-    while ($row = $rows) {
+    foreach ($rows as $row){
       $product = new ProductModel($row);
       array_push($products, $product->getAll());
     }
@@ -40,7 +41,7 @@ class ProductRepository
       return $rows;
     }
     $types = [];
-    while ($row = $rows) {
+    foreach ($rows as $row) {
       $type = new TypeModel($row);
       array_push($types,  $type->getAll());
     }
@@ -50,14 +51,18 @@ class ProductRepository
   public function create(array $data): string
   {
     $rules = [
-      ['name' => 'required,string'],
-      ['price' => 'required,number'],
-      ['type_id' => 'required,int'],
-      ['prop_content' => 'required,string'],
+      'name' => 'required,string',
+      'price' => 'required,number',
+      'type_id' => 'required,int',
+      'prop_content' => 'required,string',
     ];
+    // validate the request
     $error = Validation::validationHelper($rules, $data);
-    if ($error != '') {
-      // header("HTTP/1.0 400 invalid data");
+
+    // if error is null the means the request is vlid
+    // so if  not we need to stop the proccess and show error
+    if ($error != null) {
+      http_response_code(400);
       return $error;
     }
 
@@ -74,29 +79,6 @@ class ProductRepository
     return json_encode($stmt);
   }
 
-  private function _insertDb(string $query, array $params)
-  {
-    $stmt = $this->conn->prepare($query);
-    $stmt->execute($params);
-    $error = $this->_checkError();
-    if ($error != null) {
-      return $error;
-    }
-    return $stmt->fetch();
-  }
-
-  public function _checkTypeExists(int $id): ?string
-  {
-    $sql = "SELECT COUNT(*) AS types FROM types WHERE id = :type_id";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bindParam(':type_id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    if ($stmt->fetch(PDO::FETCH_OBJ)->types == 0) {
-      header("HTTP/1.0 500 internal server error");
-      return "you have been passed unexisted type id";
-    }
-    return null;
-  }
 
   public function delete(string $skus): string
   {
@@ -107,11 +89,16 @@ class ProductRepository
   }
 
 
-  private function _checkError()
+  
+  public function _checkTypeExists(int $id): ?string
   {
-    if (isset($this->conn->errorInfo()[2])) {
-      header("HTTP/1.0 500 internal server error");
-      return json_encode($this->conn->errorInfo()[2]);
+    $sql = "SELECT COUNT(*) AS types FROM types WHERE id = :type_id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindParam(':type_id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    if ($stmt->fetch(PDO::FETCH_OBJ)->types == 0) {
+      http_response_code(400);
+      return "you have been passed unexisted type id";
     }
     return null;
   }

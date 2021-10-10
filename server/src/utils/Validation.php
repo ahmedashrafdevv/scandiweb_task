@@ -3,17 +3,16 @@
 namespace App;
 
 class Validation implements ValidationInterface {
-    public static function validationHelper($rules , $request):string{
-        foreach ($rules as  $rule) {
-           $key = array_keys($rule)[0];
-           $validations = explode(',' , $rule[$key]);
-           foreach ($validations as $validation){
-              $error = self::$validation($key , $request);
-              if($error != "" )
-                return $error;
-           }
+    public static function validationHelper($rules , $request):?string{
+        foreach ($rules as $key => $rule) {
+            $validations = explode(',' , $rule[$key]);
+            foreach ($validations as $validation){
+                $error = self::$validation($key , $request);
+                if($error != "" )
+                  return $error;
+             }
         }
-        return "";
+        return null;
     }
 
     public static function required(string $key , array $request):string{
