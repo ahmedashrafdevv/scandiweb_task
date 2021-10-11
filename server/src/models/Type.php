@@ -9,10 +9,11 @@ class TypeModel{
     private string $prop_unit;
     // private self $allTypes ;
     public function __construct(array $record){
-        $this->id = $record['id'];
-        $this->name = $record['name']; 
-        $this->prop_name = $record['prop_name']; 
-        $this->prop_unit = $record['prop_unit']; 
+        foreach(array_keys($record) as $key){
+            if(property_exists($this, $key)){
+                $this->$key = $record[$key];       
+            }
+        }   
     }
 
 

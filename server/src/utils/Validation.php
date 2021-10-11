@@ -5,7 +5,7 @@ namespace App;
 class Validation implements ValidationInterface {
     public static function validationHelper($rules , $request):?string{
         foreach ($rules as $key => $rule) {
-            $validations = explode(',' , $rule[$key]);
+            $validations = explode(',' , $rule);
             foreach ($validations as $validation){
                 $error = self::$validation($key , $request);
                 if($error != "" )
@@ -18,20 +18,20 @@ class Validation implements ValidationInterface {
     public static function required(string $key , array $request):string{
         if(!array_key_exists($key , $request))
             return "$key is required";
-        
-        
+
+
         return "";
     }
     public static function number(string $key , array $request):string{
         if(!is_double($request[$key]) && !is_int($request[$key]))
             return "$key must be number";
-        
+
         return "";
     }
     public static function int(string $key , array $request):string{
         if(!is_int($request[$key]))
             return "$key must be integer";
-        
+
         return "";
     }
     public static function string(string $key , array $request):string{

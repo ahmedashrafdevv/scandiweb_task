@@ -18,7 +18,7 @@ class ValidationTest extends TestCase
     {
         // setup
         $rules = [
-            ['name' => 'required'],
+            'name' => 'required',
         ];
         $wrongData = ['test' => 'test value'];
         $correctData = ['name' => 'test name'];
@@ -37,7 +37,7 @@ class ValidationTest extends TestCase
     {
         // setup
         $rules = [
-            ['price' => 'number'],
+           'price' => 'number',
         ];
         $wrongData = ['price' => '120'];
         $correctIntData = ['price' =>120];
@@ -58,7 +58,7 @@ class ValidationTest extends TestCase
     {
         // setup
         $rules = [
-            ['type_id' => 'int'],
+            'type_id' => 'int',
         ];
         $wrongDataWithString = ['type_id' => '1'];
         $wrongDataWithDouble = ['type_id' => 1.2];
@@ -81,7 +81,7 @@ class ValidationTest extends TestCase
     {
         // setup
         $rules = [
-            ['name' => 'string'],
+            'name' => 'string',
         ];
         $wrongData = ['name' => 12];
         $correctData = ['name' => 'test name'];

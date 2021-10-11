@@ -54,6 +54,13 @@ class ProductRepositoryTest extends TestCase
     public function test_fetch_all()
     {
         // setup
+
+        $productCreation = [
+            "name" => "table",
+            "price" => 100.0,
+            "type_id" => 2,
+            "prop_content" => "24x45x15"
+        ];
         $result = [
                 "name" => "table",
                 "price" => 100.0,
@@ -64,7 +71,7 @@ class ProductRepositoryTest extends TestCase
         ];
 
         //Do somthing
-        $product = $this->repo->create($result);
+        $product = $this->repo->create($productCreation);
         $response = $this->repo->fetchAll();
         //make assertions
         unset($result['type_id']);

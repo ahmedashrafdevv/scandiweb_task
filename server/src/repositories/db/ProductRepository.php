@@ -59,19 +59,18 @@ class ProductRepository
     // validate the request
     $error = Validation::validationHelper($rules, $data);
 
-    // if error is null the means the request is vlid
+    // if error is null that means the request is vlid
     // so if  not we need to stop the proccess and show error
     if ($error != null) {
       http_response_code(400);
       return $error;
     }
 
-    // check if the type exists
-    $error = $this->_checkTypeExists($data['type_id']);
-    if ($error != null) {
-      return $error;
-    }
-
+     // check if the type exists
+     $error = $this->_checkTypeExists($data['type_id']);
+     if ($error != null) {
+       return $error;
+     }
     //create product
     $sql = "call CreateProduct(? , ? , ? , ?);";
     $product = new ProductModel($data);

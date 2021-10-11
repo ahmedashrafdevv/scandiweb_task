@@ -17,9 +17,13 @@ class ProductController extends Controller
   public function create():string
   {
     $data =$this->requestBody;
+
+   
     return  $this->repository->create($data);
   }
 
+
+  
   public function delete()
   {
     $data =$this->requestBody;

@@ -58,7 +58,7 @@ export default class ProductForm implements Form {
     reset = () => {
         const form =this.form.value
         Object.keys(form).map((key : string )=> {
-            form[key] = null
+            // form[key] = null
         })
         console.log(typeof 1.2)
         console.log(form)

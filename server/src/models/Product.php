@@ -13,19 +13,11 @@ class ProductModel implements ModelInterface
     private string $prop_unit = "";
 
     public function __construct(array $record){
-        $this->name = $record['name'];
-        $this->price = $record['price']; 
-        $this->prop_content = $record['prop_content'];
-        if(isset($record['prop_name']))
-            $this->prop_name = $record['prop_name'];
-        if(isset($record['prop_unit']))
-            $this->prop_unit = $record['prop_unit'];
-        if(isset($record['sku']))
-            $this->sku = $record['sku']; 
-        if(isset($record['type_id']))
-            $this->type_id = $record['type_id']; 
-
-        
+        foreach(array_keys($record) as $key){
+            if(property_exists($this, $key)){
+                $this->$key = $record[$key];       
+            }
+        }        
     }
 
     public function setSku(string $sku):void{
