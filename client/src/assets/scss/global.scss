@@ -166,3 +166,14 @@ body {
         }
     }
 }
+
+
+.error{
+    width: 100%;
+    color : var(--danger);
+    margin:5px 0;
+    font-size: 18px;
+    text-align:center;
+    display: block;
+    transition: all .3s ease-in;
+}

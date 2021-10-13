@@ -1,24 +1,31 @@
 import Form from "./Form";
 import Validation from "./Validation";
-import { ref } from 'vue'
-
-export default class ProductForm implements Form {
-    form =ref( {
-        name: null,
-        price: null,
-        type_id:null,
-    })
-    rules= {
-       name :'required,str',
-       price :'required,number',
-       type_id :'required,int',
-       prop_name :'required,str',
-       prop_unit :'required,str',
-       prop_content :'required,str',
+import { ref, watch, reactive } from 'vue'
+import {ProductFormModel} from '@/models/ProductFormModel'
+import BaseForm from '@/classes/BaseForm'
+export default class ProductForm  extends BaseForm implements Form {
+    pForm:ProductFormModel = {
+        name : "",
+        price : 0,
+        type_id : 0,
+        prop_content : ""
+    }
+    form = ref(this.pForm)
+    rules = {
+        name: 'required,str',
+        price: 'required,number',
+        type_id: 'required,int',
+        prop_name: 'required,str',
+        prop_unit: 'required,str',
+        prop_content: 'required,str',
     }
     loading = false
     submitted = false
     valid = false
+
+    validation = new Validation()
+    // directly watching a ref
+
 
     // constructor(response : any) {
 
@@ -35,7 +42,7 @@ export default class ProductForm implements Form {
 
     submit = async () => {
         this.loading = true
-        if (this.validate()){
+       
             const rawResponse = await fetch('http://127.0.0.1:8001/addnew', {
                 method: 'POST',
                 headers: {
@@ -45,23 +52,19 @@ export default class ProductForm implements Form {
                 body: JSON.stringify(this.form)
             });
             const content = await rawResponse.json();
-    
+
             console.log(content);
-        }
+       
         this.loading = false
     } // arrow function
-    validate = ():boolean => {
-        const validation = new Validation()
-        
-        return false
-    }
+   
     reset = () => {
-        const form =this.form.value
-        Object.keys(form).map((key : string )=> {
+        const form = this.form.value
+        Object.keys(form).map((key: string) => {
             // form[key] = null
         })
         console.log(typeof 1.2)
         console.log(form)
-    } 
+    }
 
 }

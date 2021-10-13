@@ -4,7 +4,8 @@ export default interface Form {
     loading:boolean
     submitted:boolean
     valid:boolean
+    errors:Array<string>
     submit: () => void; // arrow function
-    validate:() => boolean; 
+    validate:(key:any) => void; 
     reset:() => void
 }

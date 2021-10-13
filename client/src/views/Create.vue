@@ -3,29 +3,54 @@
     <div class="page-header">
       <h1>Create Product</h1>
       <div class="btns">
-        <button class="btn success" @click.prevent="productForm.submit()">submit</button>
+        <button class="btn success" @click.prevent="productForm.submit()">
+          submit
+        </button>
         <button class="btn danger" @click="productForm.reset()">reset</button>
       </div>
     </div>
     <div class="form_wrapper">
       <form ref="form">
-          <div class="input">
+        <div class="form-controller" id="name">
+          <div class="input" >
             <label>name: </label>
-            <input type="text" v-model="state.form.name" placeholder="name" >
+            <input
+              type="text"
+              @input="validate('name')"
+              v-model="state.form.name"
+              placeholder="name"
+            />
           </div>
-          <div class="input">
+        </div>
+        <div class="form-controller" id="price">
+          <div class="input" >
             <label>price: </label>
-            <input type="number" v-model="state.form.price" placeholder="price" >
+            <input
+              type="number"
+              v-model="state.form.price"
+              placeholder="price"
+            />
           </div>
-          <div class="input">
-              <label>type: </label>
-              <select placeholder="choose type" @change="typeSelected()" v-model="state.form.type_id">
-                  <option disaled :value="0">choose option</option>
-                  <option v-for="type in types" :key="type.id" :value="type.id">{{type.name}}</option>
-              </select>
+        </div>
+        <div class="form-controller" id="type">
+          <div class="input" >
+            <label>type: </label>
+            <select
+              placeholder="choose type"
+              @change="typeSelected()"
+              v-model="state.form.type_id"
+            >
+              <option disaled :value="0">choose option</option>
+              <option
+                v-for="type in state.types"
+                :key="type.id"
+                :value="type.id"
+              >
+                {{ type.name }}
+              </option>
+            </select>
           </div>
-
-          
+        </div>
       </form>
     </div>
   </div>
@@ -95,19 +120,31 @@
 // </script>
  -->
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import ProductForm from '@/classes/ProductForm'
+import { defineComponent, reactive, watch } from "vue";
+import ProductForm from "@/classes/ProductForm";
+import { ProductFormModel } from "@/models/ProductFormModel";
+import Validation from "@/classes/Validation";
 export default defineComponent({
   setup() {
-    const productForm = new ProductForm()
-    const form = productForm.form
-    const state = reactive({form})
-    return{
+    const productForm = new ProductForm();
+    const form = productForm.form;
+    const types = [""];
+    const state = reactive({ form, types });
+
+    const validation = new Validation();
+    const validate = (key: keyof typeof state.form): void => {
+      productForm.validate(state.form[key]);
+    };
+    // watch(state.form , val => {
+    //   console.log(val.name)
+    // })
+    return {
       productForm,
-      state
-    }
+      validate,
+      state,
+    };
   },
-})
+});
 </script>
 
 

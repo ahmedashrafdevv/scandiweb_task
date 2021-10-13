@@ -1,7 +1,7 @@
 export default interface ValidationInterface {
-    static  required:(key:string , form:Object)=> string
-    static number:(key:string , form:Object)=> string
-    static  int:(key:string , form:Object)=> string
-    static  str:(key:string , form:Object)=> string
-   
+    required: (key: string) => string
+    number: (key: string) => string
+    int: (key: string) => string
+    str: (key: string) => string
+
 }
